@@ -76,6 +76,10 @@ impl EguiOverlay for HelloWorld {
                 "passthrough: {}",
                 glfw_backend.window.is_mouse_passthrough()
             ));
+
+            if ui.button("close overlay").clicked() {
+                glfw_backend.window.set_should_close(true);
+            }
         });
 
         // here you decide if you want to be passthrough or not.

@@ -118,6 +118,9 @@ impl EguiOverlay for HelloWorld {
             if changed {
                 glfw_backend.window.set_pos(pos[0], pos[1]);
             }
+            if ui.button("close overlay").clicked() {
+                glfw_backend.window.set_should_close(true);
+            }
         });
 
         // here you decide if you want to be passthrough or not.
