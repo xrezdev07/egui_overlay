@@ -19,17 +19,13 @@ fn main() {
         )
         .init();
 
-    egui_overlay::start(HelloWorld {
-        frame: 0,
-        zoom_factor: 1.0,
-    });
+    egui_overlay::start(RawWindowHandleExample { frame: 0 });
 }
 
-pub struct HelloWorld {
+pub struct RawWindowHandleExample {
     pub frame: u64,
-    pub zoom_factor: f32,
 }
-impl EguiOverlay for HelloWorld {
+impl EguiOverlay for RawWindowHandleExample {
     fn gui_run(
         &mut self,
         egui_context: &egui::Context,
