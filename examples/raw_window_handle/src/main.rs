@@ -5,6 +5,8 @@ use egui_overlay::EguiOverlay;
 use egui_render_three_d::ThreeDBackend as DefaultGfxBackend;
 #[cfg(feature = "wgpu")]
 use egui_render_wgpu::WgpuBackend as DefaultGfxBackend;
+
+// Required import to access the window_handle() method on the GLFW window
 use raw_window_handle::HasWindowHandle;
 
 #[cfg(not(any(feature = "three_d", feature = "wgpu")))]
@@ -23,10 +25,6 @@ fn main() {
     egui_overlay::start(RawWindowHandleExample { frame: 0 });
 }
 
-/// This example shows how to get raw window handle from glfw backend.
-/// You can use this raw window handle to do platform specific things.
-/// For example, you can pass it to the rfd crate to show file dialogs
-/// on top of the overlay.
 pub struct RawWindowHandleExample {
     pub frame: u64,
 }
@@ -37,6 +35,11 @@ impl EguiOverlay for RawWindowHandleExample {
         _default_gfx_backend: &mut DefaultGfxBackend,
         glfw_backend: &mut egui_window_glfw_passthrough::GlfwBackend,
     ) {
+        // This example shows how to get raw window handle from glfw backend.
+        // You can use this raw window handle to do platform specific things.
+        // For example, you can pass it to the rfd crate to show file dialogs
+        // on top of the overlay.
+
         // just some controls to show how you can use glfw_backend
         egui::Window::new("controls").show(egui_context, |ui| {
             ui.set_width(300.0);
@@ -61,13 +64,14 @@ impl EguiOverlay for RawWindowHandleExample {
                 glfw_backend.window.is_mouse_passthrough()
             ));
 
-            ui.label(format!(
-                "raw window handle: {:?}",
-                glfw_backend
-                    .window
-                    .window_handle()
-                    .expect("Failed to get raw window handle"),
-            ));
+            // Code for getting a window handle
+            // window_handle() is avaialble after raw_window_handle::HasWindowHandle is imported
+            let window_handle = glfw_backend
+                .window
+                .window_handle()
+                .expect("Failed to get raw window handle");
+
+            ui.label(format!("raw window handle: {:?}", window_handle));
 
             if ui.button("close overlay").clicked() {
                 glfw_backend.window.set_should_close(true);
