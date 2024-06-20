@@ -16,6 +16,7 @@ wgpu = ["dep:egui_render_wgpu", "egui_overlay/wgpu"]
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 egui = { workspace = true }
 egui_overlay = { workspace = true, default-features = false, features = ["egui_default", "glfw_default"]}
-egui_window_glfw_passthrough = { workspace = true, features = ["raw_window_handle"] }
+egui_window_glfw_passthrough = { workspace = true }
 egui_render_three_d = { workspace = true, optional = true }
 egui_render_wgpu = { workspace = true, optional = true }
+raw-window-handle = "0.6.0"

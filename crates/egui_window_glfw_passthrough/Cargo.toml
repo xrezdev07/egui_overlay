@@ -14,10 +14,9 @@ vulkan = ["glfw/vulkan"]
 wayland = ["glfw/wayland"]
 log = ["glfw/log"]
 image = ["glfw/image"]
-raw_window_handle = ["dep:raw-window-handle"]
 
 [dependencies]
 glfw = { version = "0.55", package = "glfw-passthrough", default-features = false }
 tracing = { workspace = true }
 egui = { workspace = true }
-raw-window-handle = { version = "0.6", optional = true }
+raw-window-handle = { workspace = true }

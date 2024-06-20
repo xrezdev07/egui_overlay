@@ -17,7 +17,6 @@ wgpu = ["dep:egui_render_wgpu"]
 egui_window_glfw_passthrough = { version = "0.8", path = "crates/egui_window_glfw_passthrough", default-features = false }
 egui = { workspace = true }
 tracing = { workspace = true }
-raw-window-handle = { workspace = true }
 egui_render_three_d = { version = "0.8", path = "crates/egui_render_three_d", optional = true }
 # because opengl doesn't work on mac :((
 egui_render_wgpu = { version = "0.8", path = "crates/egui_render_wgpu", optional = true }

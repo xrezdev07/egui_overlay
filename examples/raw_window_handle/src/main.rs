@@ -5,6 +5,7 @@ use egui_overlay::EguiOverlay;
 use egui_render_three_d::ThreeDBackend as DefaultGfxBackend;
 #[cfg(feature = "wgpu")]
 use egui_render_wgpu::WgpuBackend as DefaultGfxBackend;
+use raw_window_handle::HasWindowHandle;
 
 #[cfg(not(any(feature = "three_d", feature = "wgpu")))]
 compile_error!("you must enable either `three_d` or `wgpu` feature to run this example");
@@ -22,6 +23,10 @@ fn main() {
     egui_overlay::start(RawWindowHandleExample { frame: 0 });
 }
 
+/// This example shows how to get raw window handle from glfw backend.
+/// You can use this raw window handle to do platform specific things.
+/// For example, you can pass it to the rfd crate to show file dialogs
+/// on top of the overlay.
 pub struct RawWindowHandleExample {
     pub frame: u64,
 }
@@ -59,7 +64,8 @@ impl EguiOverlay for RawWindowHandleExample {
             ui.label(format!(
                 "raw window handle: {:?}",
                 glfw_backend
-                    .raw_window_handle()
+                    .window
+                    .window_handle()
                     .expect("Failed to get raw window handle"),
             ));
 
