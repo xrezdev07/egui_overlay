@@ -22,7 +22,6 @@ egui_render_three_d = { version = "0.8", path = "crates/egui_render_three_d", op
 # because opengl doesn't work on mac :((
 egui_render_wgpu = { version = "0.8", path = "crates/egui_render_wgpu", optional = true }
 
-
 [workspace.dependencies]
 egui = { version = "0.27", default-features = false }
 bytemuck = { version = "1", default-features = false }

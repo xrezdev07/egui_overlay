@@ -348,6 +348,15 @@ impl GlfwBackend {
         self.window.set_mouse_passthrough(passthrough);
         self.passthrough = passthrough;
     }
+
+    #[cfg(feature = "raw_window_handle")]
+    pub fn raw_window_handle(
+        &self,
+    ) -> Result<raw_window_handle::WindowHandle<'_>, raw_window_handle::HandleError> {
+        use raw_window_handle::HasWindowHandle;
+
+        self.window.window_handle()
+    }
 }
 
 impl GlfwBackend {

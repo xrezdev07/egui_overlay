@@ -1,0 +1,21 @@
+[package]
+name = "raw_window_handle"
+version.workspace = true
+repository.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "An example that shows how to use the raw_window_handle feature to get a raw window handle"
+publish = false
+
+[features]
+default = ["three_d"]
+three_d = ["dep:egui_render_three_d", "egui_overlay/three_d"]
+wgpu = ["dep:egui_render_wgpu", "egui_overlay/wgpu"]
+
+[dependencies]
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+egui = { workspace = true }
+egui_overlay = { workspace = true, default-features = false, features = ["egui_default", "glfw_default"]}
+egui_window_glfw_passthrough = { workspace = true, features = ["raw_window_handle"] }
+egui_render_three_d = { workspace = true, optional = true }
+egui_render_wgpu = { workspace = true, optional = true }
